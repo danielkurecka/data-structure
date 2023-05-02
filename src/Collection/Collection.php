@@ -59,7 +59,7 @@ class Collection implements CollectionInterface, Serializable
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -87,7 +87,7 @@ class Collection implements CollectionInterface, Serializable
     /**
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->items);
     }
@@ -153,4 +153,17 @@ class Collection implements CollectionInterface, Serializable
     {
         $this->items = unserialize($data);
     }
+
+
+	public function __serialize(): array
+	{
+		return $this->items;
+	}
+
+
+	public function __unserialize(array $data)
+	{
+		$this->items = $data;
+	}
+
 }
